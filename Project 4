@@ -1,0 +1,156 @@
+class program
+{
+
+    private static void randomGen()
+    {
+        Console.WriteLine("how large would you like the dataset to be?");
+        int arraySize = Convert.ToInt32(Console.ReadLine());//sets size of array
+        int count = 0;
+        int ranNum;
+
+        int[] dataset = new int[arraySize];
+
+        while (count < arraySize)
+        {
+            Random ran = new Random();
+            ranNum = ran.Next(1, arraySize);//creates a random number
+            dataset[count] = ranNum;//set number to next point in array
+            count++;
+        }
+
+        Console.WriteLine("[{0}]", string.Join(", ", dataset));//outputs array in [a,b,c] format
+
+
+
+        TextWriter tw = new StreamWriter("randomArray.txt", false);//creates file if not already existing
+        tw.WriteLine("{0}", string.Join(" ", dataset));//saves the array to file
+        tw.Close();
+
+    }
+    public static void Main()
+    {
+
+        Console.WriteLine("1-bubble sort\n2-quick sort\n3-array");
+        string choice=Console.ReadLine();
+        if (choice=="1")
+            {
+            bubbleSort();
+        }
+        else if (choice == "2")
+        {
+            quickSort();
+        }
+        else if (choice == "3")
+        {
+            randomGen();
+        }
+        else
+        {
+            Main();
+        }
+    }
+
+    private static void bubbleSort()
+    {
+        int count = 0;
+        int loop=0;
+        int temp = 0;
+        bool noSwap = false;
+
+        //StreamReader sr = new StreamReader("randomArray.txt");
+        //string dataRead = sr.ReadLine();
+        //string[] drSplits = dataRead.Split(' ', '\t');
+
+        //foreach (var drSplit in drSplits)
+        //{
+        //    count++;//counts the size of data for array
+        //}
+
+        int arrHeight=500;
+
+        int[] dataset = new int[arrHeight];
+
+        while (count < arrHeight)
+        {
+            Random ran = new Random();
+            int ranNum = ran.Next(1, arrHeight);
+            dataset[count] = ranNum;
+            count++;
+        }
+        //generates random numbers array
+
+
+
+        for(int i=0;i<count;i++)//looping i is same as bool noswap
+        {
+            noSwap = true;
+            for (int j = i + 1; j<count; j++) 
+            {
+                if (dataset[i] > dataset[j])
+                {
+                    temp = dataset[i];
+                    dataset[i] = dataset[j];
+                    dataset[j] = temp;//switches around numbers using placeholder 
+                    noSwap = false;
+                }
+            }
+            
+        }
+        Console.WriteLine("[{0}]", string.Join(", ", dataset));
+        Main();
+    }
+
+    
+    static void swap(int[] dataset, int i, int j)
+    {
+        int temp = dataset[i];
+        dataset[i] = dataset[j];
+        dataset[j] = temp;
+        
+    }
+    static int part(int[] dataset, int low, int high)
+    {
+        int pivot = dataset[high];
+        int i = low - 1;
+
+        for (int j = low; j <= high - 1; j++)
+        {
+            if (dataset[j] < pivot)
+            {
+                i++;
+                swap(dataset, i, j);
+            }
+        }
+        swap(dataset, i + 1, high);
+        return (i + 1);
+    }
+    static void qs(int[] dataset, int low, int high)
+    {
+        if (low < high)
+        {
+            int pi = 0;
+            pi = part(dataset, low, high);
+
+            qs(dataset, low, pi - 1);
+            qs(dataset, pi + 1, high);
+        }
+    }
+    public static void quickSort()
+    {
+        int count = 0;
+        int arrHeight = 500;
+        int[] dataset = new int[arrHeight];
+        while (count < arrHeight)
+        {
+            Random ran = new Random();
+            int ranNum = ran.Next(1, arrHeight);
+            dataset[count] = ranNum;
+            count++;
+        }
+
+        qs(dataset, 0, (dataset.Length) - 1);
+        Console.WriteLine("[{0}]", string.Join(", ", dataset));
+
+        Main();
+    }
+}
