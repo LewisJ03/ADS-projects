@@ -1,0 +1,411 @@
+int slack = 0;//set as 0 as most paths have a slack of 0
+
+int oneTwo = 6;
+int twoFive = 1;
+int oneThree = 4;
+int threeFive = 1;
+
+int oneFour = 5;
+int fourSix = 2;
+int sixEight = 4;
+  
+int fiveSeven = 9;
+int fiveEight = 7;
+int sevenNine = 2;
+int eightNine = 4;
+int fiveNine = 11;
+
+int path1 = oneTwo + twoFive + fiveSeven + sevenNine;//18
+int path2 = oneTwo + twoFive + fiveEight + sevenNine;//18
+int path3 = oneTwo + threeFive + fiveSeven + sevenNine;//16
+int path4 = oneTwo + threeFive + fiveEight + sevenNine;//16
+int path5 = oneFour + fourSix + sixEight + eightNine;//15
+
+Console.WriteLine("please input the number of the point you want to start at");
+string startStr = Console.ReadLine();
+int startV = Convert.ToInt32(startStr);
+
+Console.WriteLine("please input the number of the point you want to end at");
+string endStr = Console.ReadLine();
+int endV = Convert.ToInt32(endStr);
+
+if (startV < endV)
+{
+    pathFinder();
+}
+else
+{
+    Console.WriteLine("ERROR");
+}
+
+void pathFinder()
+{
+    if (startV == 1)
+    {
+        if (endV == 2)
+        {
+            int temp1= path1 - (path1 - oneTwo);
+            int temp2= path2 - (path2 - oneTwo);
+
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("no slack time");
+            }
+        }
+
+        if (endV == 3)
+        {
+
+            int temp1 = path3 - (path3 - oneThree);
+            int temp2 = path4 - (path4 - oneThree);
+
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:"+(temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:"+temp1);
+                Console.WriteLine("no slack time");
+            }
+        }
+        if(endV==4)
+        {
+            Console.WriteLine("shortest distance"+(path5 - (path5-oneFour)));
+            Console.WriteLine("no slack time");
+        }
+        if (endV == 5)
+        {
+            int temp1=(path1 - fiveSeven - sevenNine);
+            int temp2 = (path2 - fiveEight - eightNine);
+            int temp3 = (path3 - fiveSeven - sevenNine);
+            int temp4 = (path4 - fiveEight - eightNine);
+            int temp12= temp1+ temp2;
+            int temp34= temp3+ temp4;//working out if are same
+
+
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+
+        
+        }
+        if (endV == 6)
+        {
+            Console.WriteLine("shortest distance" + (path5 -sixEight-eightNine));
+            Console.WriteLine("no slack time");
+        }
+        if (endV==7)
+        {
+            int temp1=(path1-sevenNine);
+            int temp2=(path3 - sevenNine);
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+        }
+        if (endV == 8)
+        {
+            int temp1 = (path2-eightNine);
+            int temp2 = (path4 - eightNine);
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+        }
+        if (endV == 9)
+        {
+            int temp1  = path1;
+            int temp2=path3;
+            int temp3=path5;
+            if (temp1 < temp2&&temp1<temp3)
+            {
+
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2&&temp2<temp3)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else if (temp3<temp1&&temp3<temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp3);
+                Console.WriteLine("Slack:" + (temp1 - temp3));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+
+        }
+    }
+    if (startV==2)
+    {
+        if (endV == 5)
+        {
+            int temp1=(path1 - (path1 - twoFive));
+            int temp2 = (path2 - (path2 - twoFive));
+            if (temp1>temp2)
+            {
+                Console.WriteLine("shortest distance" + temp1);
+                Console.WriteLine("slack time:"+(temp1-temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance" + temp2);
+                Console.WriteLine("slack time:" + (temp2 - temp1));
+            }
+        }
+        if (endV == 7)
+        {
+            Console.WriteLine(path1-oneTwo-sevenNine);
+        }
+        if (endV == 8)
+        {
+            Console.WriteLine(path2-oneTwo-eightNine);
+        }
+        if (endV == 9)
+        {
+            int temp1 = (path1-oneTwo);
+            int temp2 = (path2-oneTwo);
+            Console.WriteLine("shortest distance" + temp1);
+            Console.WriteLine("no slack time");
+        }
+    }
+    if (startV == 3)
+    {
+        if (endV == 5)
+        {
+            int temp1 = (path3 - (path1 - threeFive));
+            int temp2 = (path4 - (path2 - threeFive));
+            Console.WriteLine("shortest distance" + temp1);
+            Console.WriteLine("no slack time");
+        }
+        if (endV == 7)
+        {
+            Console.WriteLine(path3 - oneThree - sevenNine);
+        }
+        if (endV == 8)
+        {
+            Console.WriteLine(path4 - oneThree - eightNine);
+        }
+        if (endV == 9)
+        {
+            int temp1 = (path3 - oneThree);
+            int temp2 = (path4 - oneThree);
+            Console.WriteLine("shortest distance" + temp1);
+            Console.WriteLine("no slack time");
+        }
+    }
+    if (startV == 4)
+    {
+        if (endV == 6)
+        {
+            Console.WriteLine("shortest distance" + (path5 - (path5 - fourSix)));
+            Console.WriteLine("no slack time");
+        }
+        if (endV == 8)
+        {
+            Console.WriteLine("shortest distance" + (path5 - eightNine - oneFour));
+            Console.WriteLine("no slack time");
+        }
+        if (endV == 9)
+        {
+            Console.WriteLine("shortest distance" + (path5 - eightNine - oneFour));
+            Console.WriteLine("no slack time");
+        }
+    }
+    if (startV == 5)
+    {
+        if (endV == 7)
+        {
+            int temp1 = (path1 - oneTwo - twoFive - sevenNine);
+            int temp2 = (path3 - oneThree - threeFive - sevenNine);
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+        }
+        if (endV == 8)
+        {
+            int temp1 = (path2 - oneTwo - twoFive - eightNine);
+            int temp2 = (path4 - oneThree - threeFive - eightNine);
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+        }
+        if (endV == 9)
+        {
+            Console.WriteLine(path1 - oneTwo - twoFive);
+            Console.WriteLine(path2 - oneTwo - twoFive);
+            Console.WriteLine(path3 - oneThree - threeFive);
+            Console.WriteLine(path4 - oneThree - threeFive);
+        }
+    }
+    if (startV == 6)
+    {
+        if (endV == 8)
+        {
+            Console.WriteLine("shortest distance" + (path5 - oneFour - fourSix - eightNine));
+            Console.WriteLine("no slack time");
+        }
+        if (endV == 9)
+        {
+            Console.WriteLine("shortest distance" + (path5 - oneFour - fourSix));
+            Console.WriteLine("no slack time");
+        }
+    }
+    if (startV == 7)
+    {
+        if (endV == 9)
+        {
+            int temp1 = (path1 - (path1 - sevenNine));
+            int temp2 = (path3 - (path3 - sevenNine));
+            if (temp1 < temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("Slack:" + (temp2 - temp1));
+            }
+            else if (temp1 > temp2)
+            {
+                Console.WriteLine("shortest distance:" + temp2);
+                Console.WriteLine("Slack:" + (temp1 - temp2));
+            }
+            else
+            {
+                Console.WriteLine("shortest distance:" + temp1);
+                Console.WriteLine("no slack time");
+            }
+        }
+    }
+    if (startV == 8)
+    {
+        if (endV == 9)
+        {
+            int temp1=(path2 - (path2 - eightNine));
+            int temp2 = (path3 - (path3 - eightNine));
+            int temp3 = (path5 - (path5 - eightNine));
+            if ((temp1 == temp2) || (temp1 == temp3))
+            {
+                Console.WriteLine("shortest distance"+temp1);
+                Console.WriteLine("No slack time");
+            }
+            else if ((temp1 < temp2) || (temp1 < temp3))
+            {
+                Console.WriteLine("shortest distance"+temp1);
+                if (temp3 > temp2)
+                {
+                    Console.WriteLine("Slack:",temp3-temp1);
+                }
+                else
+                {
+                    Console.WriteLine("Slack:", temp2 - temp1);
+                }
+            }
+            else if ((temp2 < temp1) || (temp2 < temp3))
+            {
+                Console.WriteLine("shortest distance" + temp2);
+                if (temp1 > temp3)
+                {
+                    Console.WriteLine("Slack:", temp3 - temp2);
+                }
+                else
+                {
+                    Console.WriteLine("Slack:", temp1 - temp2);
+                }
+            }
+            else
+            {
+                Console.WriteLine("shortest distance" + temp3);
+                if (temp1 > temp2)
+                {
+                    Console.WriteLine("Slack:", temp1 - temp3);
+                }
+                else
+                {
+                    Console.WriteLine("Slack:", temp2 - temp3);
+                }
+            }
+        }
+    }
+    if( endV>9||startV<1)
+    {
+        Console.WriteLine("Error:outside of bounds");
+    }
+}
