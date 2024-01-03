@@ -1,0 +1,242 @@
+double varA = 0;
+double varB = 0;
+double varC = 0;
+double num1 = 0;
+double num2 = 0;
+double temp = 0;
+int bin = 0;
+
+ void calculator()
+{
+
+    Console.WriteLine("\nPlease input a number or value");
+    string inp1 = Console.ReadLine().ToUpper();
+    try
+    {
+        num1 = Convert.ToDouble(inp1);
+    }
+    catch
+    {
+        if (inp1 == "A")
+        {
+            num1 = varA;
+        }
+        else if (inp1 == "B" )
+        {
+            num1 = varB;
+        }
+        else if (inp1 == "C" )
+        {
+            num1 = varC;
+        }
+        else if (inp1=="TRUE" || inp1 == "FALSE" )
+        {
+            bin++;
+        }
+        else
+        {
+            Console.WriteLine("\nError:input not registed");
+            calculator();
+        }
+    };
+
+    Console.WriteLine("\nPlease input a number or value");
+    string inp2 = Console.ReadLine().ToUpper();
+    try
+    {
+        num2 = Convert.ToDouble(inp2);
+    }
+    catch
+    {
+        if (inp2 == "A")
+        {
+            num2 = varA;
+        }
+        else if (inp2 == "B")
+        {
+            num2 = varB;
+        }
+        else if (inp2 == "C" )
+        {
+            num2 = varC;
+        }
+        else if (inp2 == "TRUE" || inp2 == "FALSE")
+        {
+            bin++;
+            if(bin !=2)
+            {
+                Console.WriteLine("\nError:inputs must match");
+                bin = 0;
+                calculator();
+            }
+        }
+        else
+        {
+            Console.WriteLine("\nError:input not registed");
+            calculator();
+        }
+    }
+
+    Console.WriteLine("\nplease input the symbol for the equation");
+    string symbol = Console.ReadLine().ToUpper();
+
+
+    if (symbol == "+")
+    {
+        temp = num1 + num2;
+        Console.WriteLine(temp);
+    }
+    else if (symbol == "-")
+    {
+        temp = num1 - num2;
+        Console.WriteLine(temp);
+    }
+    else if (symbol == "*")
+    {
+        temp = num1 * num2;
+        Console.WriteLine(temp);
+    }
+    else if (symbol == "/")
+    {
+        temp = num1 / num2;
+        Console.WriteLine(temp);
+    }
+    else if (symbol == "^")
+    {
+        int conNum1=Convert.ToInt32(num1);
+        int conNum2 = Convert.ToInt32(num2);
+        temp = conNum1 ^conNum2;
+        Console.WriteLine(temp);
+    }
+    else if (symbol == "<")
+    {
+        if (num1 < num2)
+        {
+            Console.WriteLine(num2 + "is greater");
+        }
+        else
+        {
+            Console.WriteLine(num1 + "is greater");
+        }
+    }
+    else if (symbol == "<=")
+    {
+        if (num1 < num2)
+        {
+            Console.WriteLine(num2 + "is greater");
+        }
+        else if (num1 > num2)
+        {
+            Console.WriteLine(num1 + "is greater");
+        }
+        else
+        {
+            Console.WriteLine("both are equal");
+        }
+    }
+    else if (symbol == ">")
+    {
+        if (num1 > num2)
+        {
+            Console.WriteLine(num1 + "is greater");
+        }
+        else
+        {
+            Console.WriteLine(num2 + "is greater");
+        }
+    }
+    else if (symbol == ">=")
+    {
+        if (num1 > num2)
+        {
+            Console.WriteLine(num1 + "is greater");
+        }
+        else if (num1 < num2)
+        {
+            Console.WriteLine(num2 + "is greater");
+        }
+        else
+        {
+            Console.WriteLine("both are equal");
+        }
+    }
+    else if (symbol == "AND" || symbol == "∧")
+    {
+        if (inp1 == "TRUE" && inp2 == "TRUE")
+        {
+            Console.WriteLine("TRUE");
+        }
+        else if (inp1 == "TRUE" && inp2 == "FALSE")
+        {
+            Console.WriteLine("FALSE");
+        }
+        else if (inp1 == "FALSE" && inp2 == "TRUE")
+        {
+            Console.WriteLine("FALSE");
+        }
+        else
+        {
+            Console.WriteLine("FALSE");
+        }
+    }
+    else if (symbol == "OR" || symbol == "∨")
+    {
+        if (inp1 == "TRUE" && inp2 == "TRUE")
+        {
+            Console.WriteLine("TRUE");
+        }
+        else if (inp1 == "TRUE" && inp2 == "FALSE")
+        {
+            Console.WriteLine("TRUE");
+        }
+        else if (inp1 == "FALSE" && inp2 == "TRUE")
+        {
+            Console.WriteLine("TRUE");
+        }
+        else
+        {
+            Console.WriteLine("FALSE");
+        }
+    }
+    else if (symbol == "NOT" || symbol == "¬"||symbol=="!=")
+    {
+        if (num1 == num2)
+        {
+            Console.WriteLine("both values are equal");
+        }
+        else
+        {
+            Console.WriteLine("These values are NOT equal");
+        }
+    }
+    else
+    {
+        Console.WriteLine("ERROR");
+        calculator();
+    }
+
+    Console.WriteLine("\ninput the A,B or C to save this answer to the respective placeholder");
+    string overwrite = Console.ReadLine().ToUpper();
+    if (overwrite == "A")
+    {
+        varA = temp;
+        calculator();
+    }
+    else if (overwrite == "B")
+    {
+        varB = temp;
+        calculator();
+    }
+    else if (overwrite == "C")
+    {
+        varC = temp;
+        calculator();
+    }
+    else
+    {
+        Console.WriteLine("Understood this has not been saved");
+        calculator();
+    }
+}
+
+calculator();
