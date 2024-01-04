@@ -1,0 +1,75 @@
+class brickTransport
+{
+    static void Main()
+    {
+        int iter = 300;
+        Random ran = new Random();
+        int binary = ran.Next(0, 1);
+        int s = ran.Next(1, 29);
+
+        double[] bricks = { 3.287, 37.856, 14.348, 12.265, 54.674, 7.858, 82.594, 20.718, 37.189, 72.407, 40.745, 48.012, 32.788, 12.917, 32.394, 89.51, 43.721, 4.681, 75.317, 41.391, 53.623, 56.557, 95.49, 50.968, 18.41, 52.727, 80.214, 54.678, 92.533, 70.1 };
+        
+        for(int i=1; i <= iter; i++)
+        {
+            int sTemp = s + 1;
+            //Console.WriteLine(s);
+            //Console.WriteLine(sTemp);
+            if (bricks[sTemp] <= bricks[s])
+            {
+                double temp = bricks[s];
+                bricks[s] = bricks[sTemp];
+                bricks[sTemp] = temp;
+                //Console.WriteLine("[{0}]", string.Join(", ", bricks));
+                if (sTemp == 29)
+                {
+                    s = ran.Next(1, 28);
+                }
+                else
+                {
+                    s = sTemp;
+                }
+            }
+            else if (bricks[sTemp] > bricks[s])
+            {
+                s = ran.Next(1, 29);
+            }
+        }
+        double[] lorry1 = new double[10];
+        double[] lorry2 = new double[10];
+        double[] lorry3 = new double[10];
+
+        int counter = 0;
+        double sum1 = 0;
+        for (int pointer=0; pointer<10;pointer++)
+        {
+            lorry1[pointer] = bricks[counter];
+            counter =counter+ 3;
+            sum1 = sum1 + lorry1[pointer];
+        }
+
+        counter = 1;
+        double sum2 = 0;
+        for (int pointer = 0; pointer < 10; pointer++)
+        {
+            lorry2[pointer] = bricks[counter];
+            counter = counter + 3;
+            sum2 = sum2 + lorry2[pointer];
+        }
+
+        counter = 2;
+        double sum3 = 0;
+        for (int pointer = 0; pointer < 10; pointer++)
+        {
+            lorry3[pointer] = bricks[counter];
+            counter = counter + 3;
+            sum3= sum3 + lorry3[pointer];
+        }
+
+        Console.WriteLine("[{0}]", string.Join(", ", lorry1));
+        Console.WriteLine("[{0}]", string.Join(", ", lorry2));
+        Console.WriteLine("[{0}]", string.Join(", ", lorry3));
+        Console.WriteLine(sum1);
+        Console.WriteLine(sum2);
+        Console.WriteLine(sum3);
+    }
+}
